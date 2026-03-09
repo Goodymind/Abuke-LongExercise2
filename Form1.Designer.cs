@@ -710,7 +710,7 @@
             delete.Name = "delete";
             delete.Size = new Size(275, 35);
             delete.TabIndex = 6;
-            delete.Text = "Delete";
+            delete.Text = "Delete (Input 0 if earliest)";
             delete.UseVisualStyleBackColor = true;
             delete.Click += delete_Click;
             // 

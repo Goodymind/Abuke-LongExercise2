@@ -107,5 +107,17 @@ namespace Abuke_LongExercise2
             node.ParentNode.RemoveChild(node);
             doc.Save(path);
         }
+
+        public int deleteFirst()
+        {
+            if (root.FirstChild is not null)
+            {
+                int id = int.Parse(root.FirstChild["Id"].InnerText);
+                root.RemoveChild(root.FirstChild);
+                doc.Save(path);
+                return id;
+            }
+            return -1;
+        }
     }
 }

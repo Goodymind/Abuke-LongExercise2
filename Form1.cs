@@ -261,6 +261,30 @@ namespace Abuke_LongExercise2
         private void delete_Click(object sender, EventArgs e)
         {
             int no = (int)orderNoNumUpDown.Value;
+
+            if (no == 0)
+            {
+                int id = orderLoader.deleteFirst();
+                if (id == -1)
+                {
+                    MessageBox.Show(
+                        "There are no orders saved",
+                        "Deleteion failed",
+                        MessageBoxButtons.OK
+                    );
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Order no. " + id.ToString() + " Deleted",
+                        "Deleteion successful",
+                        MessageBoxButtons.OK
+                    );
+                    return;
+                }
+            }
+
             var result = orderLoader.getOrder(no);
 
             if (result == null)

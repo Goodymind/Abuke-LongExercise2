@@ -15,7 +15,7 @@ namespace Abuke_LongExercise2
         private XmlElement root;
         private string path;
 
-        public int CurrentID { get; set; }
+        public int CurrentID = 0;
         public OrderLoader(string path)
         {
             this.path = path;
@@ -44,6 +44,7 @@ namespace Abuke_LongExercise2
                     int currentId = int.Parse(currentIdNode.InnerText);
                     CurrentID = CurrentID < currentId ? currentId : CurrentID;
                 }
+                CurrentID++;
             }
 
             doc.Save(path);
@@ -84,6 +85,26 @@ namespace Abuke_LongExercise2
 
             root.AppendChild(orderElement);
             CurrentID++;
+            doc.Save(path);
+        }
+
+        public XmlNode getOrder(int order_no)
+        {
+            var orders = root.ChildNodes;
+            foreach (XmlNode orderNode in orders)
+            {
+                var currentIdNode = orderNode["Id"];
+                int currentId = int.Parse(currentIdNode.InnerText);
+                if (currentId == order_no)
+                    return orderNode;
+            }
+
+            return null;
+        }
+
+        public void deleteOrder(XmlNode node)
+        {
+            node.ParentNode.RemoveChild(node);
             doc.Save(path);
         }
     }

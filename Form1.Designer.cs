@@ -76,6 +76,10 @@
             orderList = new FlowLayoutPanel();
             totalPriceLabel = new Label();
             save = new Button();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            label13 = new Label();
+            orderNoNumUpDown = new NumericUpDown();
+            delete = new Button();
             load = new Button();
             OrderOptions.SuspendLayout();
             ItemOptions.SuspendLayout();
@@ -102,6 +106,8 @@
             spicePanel.SuspendLayout();
             itemControlPanel.SuspendLayout();
             OrderListPanel.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)orderNoNumUpDown).BeginInit();
             SuspendLayout();
             // 
             // OrderOptions
@@ -612,13 +618,13 @@
             OrderListPanel.Controls.Add(orderList);
             OrderListPanel.Controls.Add(totalPriceLabel);
             OrderListPanel.Controls.Add(save);
-            OrderListPanel.Controls.Add(load);
+            OrderListPanel.Controls.Add(flowLayoutPanel1);
             OrderListPanel.Dock = DockStyle.Left;
             OrderListPanel.FlowDirection = FlowDirection.TopDown;
             OrderListPanel.Location = new Point(483, 25);
             OrderListPanel.MinimumSize = new Size(0, 519);
             OrderListPanel.Name = "OrderListPanel";
-            OrderListPanel.Size = new Size(118, 519);
+            OrderListPanel.Size = new Size(287, 519);
             OrderListPanel.TabIndex = 0;
             OrderListPanel.WrapContents = false;
             // 
@@ -639,7 +645,7 @@
             orderList.Location = new Point(3, 28);
             orderList.Name = "orderList";
             orderList.Padding = new Padding(40, 20, 40, 20);
-            orderList.Size = new Size(112, 40);
+            orderList.Size = new Size(281, 40);
             orderList.TabIndex = 4;
             // 
             // totalPriceLabel
@@ -653,8 +659,8 @@
             // 
             // save
             // 
-            save.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            save.Location = new Point(3, 99);
+            save.Dock = DockStyle.Right;
+            save.Location = new Point(172, 99);
             save.Name = "save";
             save.Size = new Size(112, 34);
             save.TabIndex = 2;
@@ -662,12 +668,59 @@
             save.UseVisualStyleBackColor = true;
             save.Click += save_Click;
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.AutoSize = true;
+            flowLayoutPanel1.Controls.Add(label13);
+            flowLayoutPanel1.Controls.Add(orderNoNumUpDown);
+            flowLayoutPanel1.Controls.Add(delete);
+            flowLayoutPanel1.Controls.Add(load);
+            flowLayoutPanel1.Dock = DockStyle.Bottom;
+            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanel1.Location = new Point(3, 139);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(281, 144);
+            flowLayoutPanel1.TabIndex = 9;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Dock = DockStyle.Fill;
+            label13.Location = new Point(3, 0);
+            label13.Name = "label13";
+            label13.Size = new Size(275, 25);
+            label13.TabIndex = 8;
+            label13.Text = "Input Order No. to load or delete";
+            // 
+            // orderNoNumUpDown
+            // 
+            orderNoNumUpDown.AutoSize = true;
+            orderNoNumUpDown.Dock = DockStyle.Fill;
+            orderNoNumUpDown.Location = new Point(3, 28);
+            orderNoNumUpDown.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            orderNoNumUpDown.Name = "orderNoNumUpDown";
+            orderNoNumUpDown.Size = new Size(275, 31);
+            orderNoNumUpDown.TabIndex = 7;
+            // 
+            // delete
+            // 
+            delete.AutoSize = true;
+            delete.Dock = DockStyle.Fill;
+            delete.Location = new Point(3, 65);
+            delete.Name = "delete";
+            delete.Size = new Size(275, 35);
+            delete.TabIndex = 6;
+            delete.Text = "Delete";
+            delete.UseVisualStyleBackColor = true;
+            delete.Click += delete_Click;
+            // 
             // load
             // 
-            load.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            load.Location = new Point(3, 139);
+            load.AutoSize = true;
+            load.Dock = DockStyle.Fill;
+            load.Location = new Point(3, 106);
             load.Name = "load";
-            load.Size = new Size(112, 34);
+            load.Size = new Size(275, 35);
             load.TabIndex = 3;
             load.Text = "Load";
             load.UseVisualStyleBackColor = true;
@@ -725,6 +778,9 @@
             itemControlPanel.PerformLayout();
             OrderListPanel.ResumeLayout(false);
             OrderListPanel.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)orderNoNumUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -781,5 +837,9 @@
         private RadioButton spicyRadio;
         private RadioButton verySpicyRadio;
         private Label debugLabel;
+        private Button delete;
+        private NumericUpDown orderNoNumUpDown;
+        private Label label13;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }

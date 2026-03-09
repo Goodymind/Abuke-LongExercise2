@@ -61,7 +61,7 @@
             removeVeggies = new CheckBox();
             splitContainer3 = new SplitContainer();
             label10 = new Label();
-            numericUpDown1 = new NumericUpDown();
+            wrapExtraCheeseNumericUpDown = new NumericUpDown();
             label12 = new Label();
             spicePanel = new FlowLayoutPanel();
             mildRadio = new RadioButton();
@@ -97,7 +97,7 @@
             splitContainer3.Panel1.SuspendLayout();
             splitContainer3.Panel2.SuspendLayout();
             splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)wrapExtraCheeseNumericUpDown).BeginInit();
             spicePanel.SuspendLayout();
             itemControlPanel.SuspendLayout();
             OrderListPanel.SuspendLayout();
@@ -476,7 +476,7 @@
             // 
             // splitContainer3.Panel2
             // 
-            splitContainer3.Panel2.Controls.Add(numericUpDown1);
+            splitContainer3.Panel2.Controls.Add(wrapExtraCheeseNumericUpDown);
             splitContainer3.Panel2MinSize = 50;
             splitContainer3.Size = new Size(359, 34);
             splitContainer3.SplitterDistance = 200;
@@ -492,13 +492,15 @@
             label10.TabIndex = 3;
             label10.Text = "Extra Cheese";
             // 
-            // numericUpDown1
+            // wrapExtraCheeseNumericUpDown
             // 
-            numericUpDown1.Dock = DockStyle.Fill;
-            numericUpDown1.Location = new Point(0, 0);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(155, 31);
-            numericUpDown1.TabIndex = 0;
+            wrapExtraCheeseNumericUpDown.Dock = DockStyle.Fill;
+            wrapExtraCheeseNumericUpDown.Location = new Point(0, 0);
+            wrapExtraCheeseNumericUpDown.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            wrapExtraCheeseNumericUpDown.Name = "wrapExtraCheeseNumericUpDown";
+            wrapExtraCheeseNumericUpDown.Size = new Size(155, 31);
+            wrapExtraCheeseNumericUpDown.TabIndex = 0;
+            wrapExtraCheeseNumericUpDown.ValueChanged += wrapSelected;
             // 
             // label12
             // 
@@ -648,7 +650,6 @@
             Save.TabIndex = 2;
             Save.Text = "Save";
             Save.UseVisualStyleBackColor = true;
-            Save.Visible = false;
             // 
             // load
             // 
@@ -705,7 +706,7 @@
             splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
             splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)wrapExtraCheeseNumericUpDown).EndInit();
             spicePanel.ResumeLayout(false);
             spicePanel.PerformLayout();
             itemControlPanel.ResumeLayout(false);
@@ -761,7 +762,7 @@
         private OrderItem orderItem1;
         private OrderItem orderItem2;
         private Label totalPriceLabel;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown wrapExtraCheeseNumericUpDown;
         private FlowLayoutPanel spicePanel;
         private Label label12;
         private RadioButton mildRadio;

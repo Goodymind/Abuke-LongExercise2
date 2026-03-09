@@ -44,6 +44,7 @@ namespace Abuke_LongExercise2
             burgerPanel.Visible = false;
             sidePanel.Visible = false;
             wrapPanel.Visible = true;
+            createDummyWrap();
             current = OrderItemE.Wrap;
         }
 
@@ -102,8 +103,27 @@ namespace Abuke_LongExercise2
             orderList.Controls.Add(sideItem);
         }
 
-        private void addNewWrap() { 
-            
+        private void addNewWrap() {
+            int extraCheese = (int)wrapExtraCheeseNumericUpDown.Value;
+            bool allmeat = removeVeggies.Checked;
+            var spiceRadio = spicePanel.Controls.OfType<RadioButton>()
+                                                .FirstOrDefault(r => r.Checked);
+            string spiceLevel = spiceRadio is not null ? spiceRadio.Text : "None";
+
+            if (spiceLevel == "None")
+            {
+                return;
+            }
+
+            var wrap = new Wrap();
+            wrap.AddCheese(extraCheese);
+            wrap.SetSpiceLevel(spiceLevel);
+            if (allmeat) wrap.RemoveVeggies();
+
+            var wrapItem = new OrderItem();
+            wrapItem.Item = wrap;
+            wrapItem.removeOrderItem += removeOrderItem;
+            orderList.Controls.Add(wrapItem);
         }
 
         private void removeOrderItem(object? sender, EventArgs e)
@@ -125,6 +145,11 @@ namespace Abuke_LongExercise2
         private void burgerSelected(object? sender, EventArgs e) 
         {
             createDummyBurger();
+        }
+
+        private void wrapSelected(object? sender, EventArgs e)
+        {
+            createDummyWrap();
         }
 
         private void createDummyBurger()
@@ -156,6 +181,27 @@ namespace Abuke_LongExercise2
             dummySide.Type = type;
             dummySide.Size = size;
             initPrice.Text = dummySide.Cost + " PHP";
+        }
+
+        private void createDummyWrap()
+        {
+            int extraCheese = (int)wrapExtraCheeseNumericUpDown.Value;
+            bool allmeat = removeVeggies.Checked;
+            var spiceRadio = spicePanel.Controls.OfType<RadioButton>()
+                                                .FirstOrDefault(r => r.Checked);
+            string spiceLevel = spiceRadio is not null ? spiceRadio.Text : "None";
+
+            if (spiceLevel == "None")
+            {
+                return;
+            }
+
+            var wrap = new Wrap();
+            wrap.AddCheese(extraCheese);
+            wrap.SetSpiceLevel(spiceLevel);
+            if (allmeat) wrap.RemoveVeggies();
+
+            initPrice.Text = wrap.Cost + " PHP";
         }
     }
 }

@@ -34,6 +34,7 @@
             addBurger = new Button();
             addSide = new Button();
             addWrap = new Button();
+            debugLabel = new Label();
             label2 = new Label();
             ItemOptions = new FlowLayoutPanel();
             burgerPanel = new FlowLayoutPanel();
@@ -74,7 +75,7 @@
             label11 = new Label();
             orderList = new FlowLayoutPanel();
             totalPriceLabel = new Label();
-            Save = new Button();
+            save = new Button();
             load = new Button();
             OrderOptions.SuspendLayout();
             ItemOptions.SuspendLayout();
@@ -111,6 +112,7 @@
             OrderOptions.Controls.Add(addBurger);
             OrderOptions.Controls.Add(addSide);
             OrderOptions.Controls.Add(addWrap);
+            OrderOptions.Controls.Add(debugLabel);
             OrderOptions.Dock = DockStyle.Left;
             OrderOptions.Location = new Point(0, 25);
             OrderOptions.Name = "OrderOptions";
@@ -155,6 +157,14 @@
             addWrap.Text = "Wrap";
             addWrap.UseVisualStyleBackColor = true;
             addWrap.Click += addWrap_Click;
+            // 
+            // debugLabel
+            // 
+            debugLabel.AutoSize = true;
+            debugLabel.Location = new Point(3, 145);
+            debugLabel.Name = "debugLabel";
+            debugLabel.Size = new Size(0, 25);
+            debugLabel.TabIndex = 4;
             // 
             // label2
             // 
@@ -601,7 +611,7 @@
             OrderListPanel.Controls.Add(label11);
             OrderListPanel.Controls.Add(orderList);
             OrderListPanel.Controls.Add(totalPriceLabel);
-            OrderListPanel.Controls.Add(Save);
+            OrderListPanel.Controls.Add(save);
             OrderListPanel.Controls.Add(load);
             OrderListPanel.Dock = DockStyle.Left;
             OrderListPanel.FlowDirection = FlowDirection.TopDown;
@@ -641,15 +651,16 @@
             totalPriceLabel.TabIndex = 5;
             totalPriceLabel.Text = "Total Price: 0";
             // 
-            // Save
+            // save
             // 
-            Save.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            Save.Location = new Point(3, 99);
-            Save.Name = "Save";
-            Save.Size = new Size(112, 34);
-            Save.TabIndex = 2;
-            Save.Text = "Save";
-            Save.UseVisualStyleBackColor = true;
+            save.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            save.Location = new Point(3, 99);
+            save.Name = "save";
+            save.Size = new Size(112, 34);
+            save.TabIndex = 2;
+            save.Text = "Save";
+            save.UseVisualStyleBackColor = true;
+            save.Click += save_Click;
             // 
             // load
             // 
@@ -660,6 +671,7 @@
             load.TabIndex = 3;
             load.Text = "Load";
             load.UseVisualStyleBackColor = true;
+            load.Click += load_Click;
             // 
             // Form1
             // 
@@ -754,7 +766,7 @@
         private FlowLayoutPanel itemControlPanel;
         private Label initPrice;
         private Button button1;
-        private Button Save;
+        private Button save;
         private Button load;
         private NumericUpDown extraPattiesNumericUpDown;
         private NumericUpDown extraCheeseNumericUpDown;
@@ -768,5 +780,6 @@
         private RadioButton mildRadio;
         private RadioButton spicyRadio;
         private RadioButton verySpicyRadio;
+        private Label debugLabel;
     }
 }

@@ -1,22 +1,29 @@
 
 using Abuke_LongExercise1;
+using System.Xml;
 namespace Abuke_LongExercise2
 {
     public partial class Form1 : Form
     {
         private int totalPrice;
-        private int TotalPrice {
-            get { return totalPrice;  }
-            set { 
-                totalPrice = value; 
+        private int TotalPrice
+        {
+            get { return totalPrice; }
+            set
+            {
+                totalPrice = value;
                 totalPriceLabel.Text = "Total Price " + totalPrice + " PHP";
             }
         }
 
+        private OrderLoader orderLoader;
+        private int currentOrderID;
 
         public Form1()
         {
             InitializeComponent();
+            orderLoader = new OrderLoader("orders.xml");
+            currentOrderID = orderLoader.CurrentID;
         }
         enum OrderItemE { Burger, Wrap, Side, None }
         OrderItemE current = OrderItemE.None;
@@ -58,14 +65,15 @@ namespace Abuke_LongExercise2
             {
                 addNewSide();
             }
-            else if (current == OrderItemE.Wrap) 
+            else if (current == OrderItemE.Wrap)
             {
                 addNewWrap();
             }
         }
 
-        private void addNewBurger() {
-            int extraPatties = (int) extraPattiesNumericUpDown.Value;
+        private void addNewBurger()
+        {
+            int extraPatties = (int)extraPattiesNumericUpDown.Value;
             int extraCheese = (int)extraCheeseNumericUpDown.Value;
             bool hasVeggies = burgerVeggies.Checked;
             Burger burger = new Burger();
@@ -77,10 +85,11 @@ namespace Abuke_LongExercise2
             burgerItem.Item = burger;
             burgerItem.removeOrderItem += removeOrderItem;
             orderList.Controls.Add(burgerItem);
-            TotalPrice += burger.Cost;        
+            TotalPrice += burger.Cost;
         }
 
-        private void addNewSide() {
+        private void addNewSide()
+        {
             var typeRadio = sideTypes.Controls.OfType<RadioButton>()
                                             .FirstOrDefault(r => r.Checked);
             var sizeRadio = sideSize.Controls.OfType<RadioButton>()
@@ -89,7 +98,7 @@ namespace Abuke_LongExercise2
             string type = typeRadio is not null ? typeRadio.Text : "None";
             string size = sizeRadio is not null ? sizeRadio.Text : "None";
 
-            if (type == "None" || size == "None") 
+            if (type == "None" || size == "None")
                 return;
 
             var side = new Side();
@@ -103,7 +112,8 @@ namespace Abuke_LongExercise2
             orderList.Controls.Add(sideItem);
         }
 
-        private void addNewWrap() {
+        private void addNewWrap()
+        {
             int extraCheese = (int)wrapExtraCheeseNumericUpDown.Value;
             bool allmeat = removeVeggies.Checked;
             var spiceRadio = spicePanel.Controls.OfType<RadioButton>()
@@ -128,7 +138,7 @@ namespace Abuke_LongExercise2
 
         private void removeOrderItem(object? sender, EventArgs e)
         {
-            if (sender is OrderItem item) 
+            if (sender is OrderItem item)
             {
                 TotalPrice -= item.Item.Cost;
                 orderList.Controls.Remove(item);
@@ -137,12 +147,12 @@ namespace Abuke_LongExercise2
         }
 
         // Function to display current selected side cost
-        private void sideSizeTypeSelected(object? sender, EventArgs e) 
+        private void sideSizeTypeSelected(object? sender, EventArgs e)
         {
             createDummySide();
         }
 
-        private void burgerSelected(object? sender, EventArgs e) 
+        private void burgerSelected(object? sender, EventArgs e)
         {
             createDummyBurger();
         }
@@ -202,6 +212,34 @@ namespace Abuke_LongExercise2
             if (allmeat) wrap.RemoveVeggies();
 
             initPrice.Text = wrap.Cost + " PHP";
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            List<OrderItem> orderItems = orderList.Controls.OfType<OrderItem>().ToList();
+            if (orderItems.Count == 0)
+                return;
+
+            var order = new Order(orderLoader.CurrentID);
+
+            for (int i = 0; i < orderItems.Count; i++)
+            {
+                var oi = orderItems.ElementAt(i);
+                order.Items.Add(oi.Item);
+                orderList.Controls.Remove(oi);
+                oi.Dispose();
+            }
+
+            TotalPrice = 0;
+
+            orderLoader.addOrder(order);
+
+
+        }
+
+        private void load_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

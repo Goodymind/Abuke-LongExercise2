@@ -17,13 +17,11 @@ namespace Abuke_LongExercise2
         }
 
         private OrderLoader orderLoader;
-        private int currentOrderID;
 
         public Form1()
         {
             InitializeComponent();
             orderLoader = new OrderLoader("orders.xml");
-            currentOrderID = orderLoader.CurrentID;
         }
         enum OrderItemE { Burger, Wrap, Side, None }
         OrderItemE current = OrderItemE.None;
@@ -234,10 +232,33 @@ namespace Abuke_LongExercise2
 
             orderLoader.addOrder(order);
 
+            DialogResult result = MessageBox.Show(
+                "Order has been saved.\nOrder No: " + (orderLoader.CurrentID - 1),
+                "Confirmation",
+                MessageBoxButtons.OK
+                );
 
         }
 
         private void load_Click(object sender, EventArgs e)
+        {
+            int no = (int) orderNoNumUpDown.Value;
+            var result = orderLoader.getOrder(no);
+
+            if (result == null)
+            {
+                DialogResult dialogResult = MessageBox.Show(
+                    "Order no. " + no.ToString() + " Does not exist",
+                    "Error",
+                    MessageBoxButtons.OK
+                    );
+                return;
+            }
+            var od = new OrderDetail(result);
+            od.Show();
+        }
+
+        private void delete_Click(object sender, EventArgs e)
         {
 
         }
